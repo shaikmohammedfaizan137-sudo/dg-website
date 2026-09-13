@@ -1,19 +1,19 @@
 /**
- * DG CONSULTANCY — INTERACTIVE DIGITAL EXPERIENCE ENGINE
- * Architecture: Modular Vanilla JS with High-Performance Scroll Observers
+ * DG CONSULTANCY — VERSION 10 DIGITAL EXPERIENCE ENGINE
+ * High-Performance Modular Scroll & Interactive Directory Engine
  */
 
 document.addEventListener('DOMContentLoaded', () => {
   'use strict';
 
   // --------------------------------------------------------------------------
-  // 1. HEADER & NAVIGATION SCROLL OBSERVER
+  // 1. HEADER SCROLL OBSERVER & MOBILE MENU
   // --------------------------------------------------------------------------
   const siteHeader = document.getElementById('site-header');
   const mobileNavToggle = document.getElementById('mobile-nav-toggle');
   const mobileNavPanel = document.getElementById('mobile-nav-panel');
 
-  const handleScroll = () => {
+  const handleHeaderScroll = () => {
     if (window.scrollY > 40) {
       siteHeader.classList.add('scrolled');
     } else {
@@ -21,10 +21,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  window.addEventListener('scroll', handleScroll, { passive: true });
-  handleScroll();
+  window.addEventListener('scroll', handleHeaderScroll, { passive: true });
+  handleHeaderScroll();
 
-  // Mobile Menu Toggle
   if (mobileNavToggle && mobileNavPanel) {
     mobileNavToggle.addEventListener('click', () => {
       const isOpen = mobileNavPanel.classList.contains('open');
@@ -41,7 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Close mobile nav when clicking a link
     const mobileLinks = mobileNavPanel.querySelectorAll('a');
     mobileLinks.forEach(link => {
       link.addEventListener('click', () => {
@@ -54,13 +52,13 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --------------------------------------------------------------------------
-  // 2. INTERACTIVE SERVICE DIRECTORY (SECTION 03)
+  // 2. 03 SERVICE DIRECTORY INTERACTIVE ENGINE
   // --------------------------------------------------------------------------
   const serviceData = {
     accounting: {
       title: "Accounting",
       headline: "KNOW WHERE THE BUSINESS STANDS.",
-      copy: "Accurate financial records give you a clearer picture of performance, position and the decisions ahead. Our accounting services ensure your numbers are structured, compliant, and insightful.",
+      copy: "Accurate financial records give you a clearer picture of performance, position, and the decisions ahead. Our accounting services ensure your numbers are structured, compliant, and insightful.",
       items: [
         "Bookkeeping & Ledger Maintenance",
         "Financial Statements Preparation",
@@ -76,10 +74,10 @@ document.addEventListener('DOMContentLoaded', () => {
       headline: "CONFIDENCE IN THE NUMBERS.",
       copy: "Professional audit support designed to provide greater confidence in financial information and strengthen internal control across your operational ecosystem.",
       items: [
-        "Financial Statement Audits",
+        "Financial Statement Statutory Audits",
         "Internal Audit & Control Evaluation",
-        "Risk Assessment & Mitigation",
-        "Regulatory Compliance Review"
+        "Risk Assessment & Mitigation Frameworks",
+        "Regulatory & Corporate Governance Compliance"
       ],
       ctaText: "DISCUSS AUDITING →",
       ctaHref: "services/auditing.html",
@@ -90,10 +88,10 @@ document.addEventListener('DOMContentLoaded', () => {
       headline: "STAY AHEAD OF OBLIGATIONS.",
       copy: "Practical tax support that helps businesses understand their responsibilities, prepare accurately, and avoid unnecessary surprises or penalties.",
       items: [
-        "Corporate & Individual Tax Preparation",
-        "Tax Registration & Filing",
-        "Strategic Tax Planning",
-        "GRA Tax Representation & Advisory"
+        "Corporate & Individual Tax Return Filing",
+        "VAT Registration, Filings & Reconciliations",
+        "Strategic Tax Planning & Advisory",
+        "GRA Representation & Audit Defense"
       ],
       ctaText: "DISCUSS TAXATION →",
       ctaHref: "services/taxation.html",
@@ -104,10 +102,10 @@ document.addEventListener('DOMContentLoaded', () => {
       headline: "ONE LESS THING TO WORRY ABOUT.",
       copy: "Reliable payroll administration that keeps an essential part of your business running accurately, confidentially, and consistently every single cycle.",
       items: [
-        "End-to-End Payroll Processing",
-        "NIS & Tax Deduction Calculations",
-        "Employee Record Administration",
-        "Payroll Summary & Statutory Reporting"
+        "Monthly & Fortnightly Payroll Processing",
+        "NIS & PAYE Tax Statutory Calculation",
+        "Confidential Employee Pay Slip Generation",
+        "Annual Payroll Returns & Summary Statements"
       ],
       ctaText: "DISCUSS PAYROLL →",
       ctaHref: "services/payroll.html",
@@ -116,12 +114,12 @@ document.addEventListener('DOMContentLoaded', () => {
     consulting: {
       title: "Consulting",
       headline: "WHEN NUMBERS NEED A STRATEGY.",
-      copy: "Financial and business guidance when an important strategic decision requires more than a spreadsheet. We help align your numbers with long-term growth.",
+      copy: "Financial and business guidance when an important strategic decision requires more than a spreadsheet. We bridge financial intelligence with enterprise strategy.",
       items: [
-        "Business Setup & Structuring",
-        "Financial & Investment Advisory",
-        "Comprehensive Business Planning",
-        "Regulatory & Corporate Compliance Advisory"
+        "Business Incorporation & Entity Setup in Guyana",
+        "Financial Modeling & Feasibility Planning",
+        "Investment Advisory & Capital Structuring",
+        "Regulatory & Commercial Compliance Advisory"
       ],
       ctaText: "DISCUSS CONSULTING →",
       ctaHref: "services/consulting.html",
@@ -144,39 +142,33 @@ document.addEventListener('DOMContentLoaded', () => {
         const data = serviceData[serviceKey];
         if (!data) return;
 
-        // Update Nav Active State
         navItems.forEach(nav => nav.classList.remove('active'));
         item.classList.add('active');
 
-        // Smooth transition effect
-        displayPanel.style.opacity = '0.4';
+        displayPanel.style.opacity = '0.35';
 
         setTimeout(() => {
           if (panelHeadline) panelHeadline.textContent = data.headline;
           if (panelCopy) panelCopy.textContent = data.copy;
-          
           if (panelList) {
             panelList.innerHTML = data.items.map(i => `<div class="service-included-item">${i}</div>`).join('');
           }
-          
           if (panelCta) {
             panelCta.textContent = data.ctaText;
             panelCta.setAttribute('href', data.ctaHref);
           }
-
           if (panelImg) {
             panelImg.src = data.image;
             panelImg.alt = `DG Consultancy ${data.title} Service`;
           }
-
           displayPanel.style.opacity = '1';
-        }, 150);
+        }, 140);
       });
     });
   }
 
   // --------------------------------------------------------------------------
-  // 3. SIGNATURE SECTION TRANSFORMATION OBSERVER (SECTION 04)
+  // 3. 04 SIGNATURE DG SYSTEM TRANSFORMATION OBSERVER
   // --------------------------------------------------------------------------
   const signatureVis = document.getElementById('signature-visualization');
   const signatureSection = document.getElementById('signature-section');
@@ -190,7 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
           signatureVis.classList.remove('aligned');
         }
       });
-    }, { threshold: 0.35 });
+    }, { threshold: 0.3 });
 
     signatureObserver.observe(signatureSection);
   }
@@ -209,15 +201,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
     }, {
-      rootMargin: '0px 0px -50px 0px',
-      threshold: 0.15
+      rootMargin: '0px 0px -40px 0px',
+      threshold: 0.12
     });
 
     revealElements.forEach(el => revealObserver.observe(el));
   }
 
   // --------------------------------------------------------------------------
-  // 5. CONTACT FORM HANDLING
+  // 5. CONTACT FORM HANDLING & FEEDBACK
   // --------------------------------------------------------------------------
   const contactForm = document.getElementById('contact-form');
   const formFeedback = document.getElementById('form-feedback');
@@ -227,7 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       
       const submitBtn = contactForm.querySelector('button[type="submit"]');
-      const originalText = submitBtn ? submitBtn.innerHTML : 'SEND ENQUIRY →';
+      const originalText = submitBtn ? submitBtn.innerHTML : 'START THE CONVERSATION →';
       
       if (submitBtn) {
         submitBtn.disabled = true;
@@ -238,8 +230,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (formFeedback) {
           formFeedback.style.display = 'block';
           formFeedback.innerHTML = `
-            <div style="padding: 1.25rem; background-color: #EEF7EE; border-left: 3px solid #2E7D32; color: #1B5E20; font-size: 0.9rem; font-weight: 600;">
-              Thank you. Your consultation request has been received. Our team will contact you within 24 hours.
+            <div style="padding: 1.25rem; background-color: #EEF7EE; border-left: 4px solid #2E7D32; color: #1B5E20; font-size: 0.9rem; font-weight: 700;">
+              Thank you. Your consultation request has been received. Our team will respond within 24 hours.
             </div>
           `;
         }
@@ -250,7 +242,7 @@ document.addEventListener('DOMContentLoaded', () => {
           submitBtn.disabled = false;
           submitBtn.innerHTML = originalText;
         }
-      }, 1000);
+      }, 900);
     });
   }
 });
