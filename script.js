@@ -86,14 +86,37 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --------------------------------------------------------------------------
-  // 3. HERO MOUSE PARALLAX INTERACTION
+  // 3. HERO MOUSE PARALLAX & SIDE NAV INTERACTION
   // --------------------------------------------------------------------------
-  const heroVisual = document.querySelector('.hero-visual-svg');
-  if (heroVisual && window.innerWidth > 1024) {
+  const heroCard = document.querySelector('.hero-floating-card');
+  const heroImgWrapper = document.querySelector('.hero-image-wrapper');
+  
+  if (heroCard && window.innerWidth > 1024) {
     window.addEventListener('mousemove', (e) => {
-      const mouseX = (e.clientX / window.innerWidth - 0.5) * 20;
-      const mouseY = (e.clientY / window.innerHeight - 0.5) * 20;
-      heroVisual.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
+      const mouseX = (e.clientX / window.innerWidth - 0.5) * 16;
+      const mouseY = (e.clientY / window.innerHeight - 0.5) * 16;
+      
+      heroCard.style.transform = `translate3d(${-mouseX}px, calc(-50% + ${-mouseY}px), 0)`;
+      if (heroImgWrapper) {
+        heroImgWrapper.style.transform = `translate3d(${mouseX * 0.5}px, ${mouseY * 0.5}px, 0)`;
+      }
+    });
+  }
+
+  const sideNavItems = document.querySelectorAll('.side-nav-item');
+  if (sideNavItems.length > 0) {
+    sideNavItems.forEach((item, index) => {
+      item.addEventListener('click', () => {
+        sideNavItems.forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
+        
+        // Scroll smoothly to corresponding section
+        const targets = ['#hero', '#intro', '#services', '#why-dg'];
+        if (targets[index]) {
+          const section = document.querySelector(targets[index]);
+          if (section) section.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
     });
   }
 
