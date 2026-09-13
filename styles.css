@@ -1,53 +1,49 @@
 /* ==========================================================================
-   DG CONSULTANCY — VERSION 10 DESIGN SYSTEM & STYLESHEET
-   Brand Force Strategy:
-   NAVY (#2D4877) = Trust & Authority
-   DEEP NAVY (#101E35) = Immersive Spatial Depth
-   BLUE (#0B90C8) = Financial Intelligence & Data Connection
-   ORANGE (#FB9237) = Strategic Action & Momentum
-   WHITE (#FFFFFF) / LIGHT BLUE-GRAY (#F3F7FA) = Structural Clarity
+   DG CONSULTANCY — AWARD-WINNING LUXURY FINANCIAL EXPERIENCE
+   Design Aesthetic: Swiss Typography + Luxury Consulting + Modern Architecture + Editorial Data Visualization
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
-   1. COLOR SYSTEM & CSS VARIABLES
+   1. COLOR TOKENS & BRAND FORCES
    -------------------------------------------------------------------------- */
 :root {
-  /* Brand Source Palette */
+  /* Surface Palette */
+  --color-dark-navy: #0B121E;
+  --color-deep-navy: #101E35;
   --color-navy: #2D4877;
-  --color-dark-navy: #101E35;
   --color-blue: #0B90C8;
   --color-orange: #FB9237;
   
-  /* Neutral Surfaces & Lighting */
+  /* Neutrals */
   --color-white: #FFFFFF;
-  --color-bg-light: #F3F7FA;
-  --color-bg-pale: #EBF1F5;
-  --color-bg-card: #FFFFFF;
+  --color-bg-light: #F7F9FA;
+  --color-bg-pale: #EDF2F6;
+  --color-card-bg: #FFFFFF;
   
-  /* Text & Border Tokens */
-  --color-text-primary: #101E35;
+  /* Typography & Lines */
+  --color-text-primary: #0B121E;
   --color-text-secondary: #334155;
   --color-text-muted: #64748B;
   --color-text-light: #94A3B8;
   --color-border: #E2E8F0;
-  --color-border-subtle: rgba(45, 72, 119, 0.12);
+  --color-border-grid: rgba(45, 72, 119, 0.12);
   --color-border-dark: rgba(255, 255, 255, 0.12);
 
   /* Accents & Glows */
-  --color-blue-glow: rgba(11, 144, 200, 0.15);
-  --color-orange-glow: rgba(251, 146, 55, 0.2);
+  --color-blue-glow: rgba(11, 144, 200, 0.18);
+  --color-orange-glow: rgba(251, 146, 55, 0.22);
 
-  /* Typography */
+  /* Typography Stack */
   --font-primary: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'JetBrains Mono', monospace, sans-serif;
 
-  /* Layout & Grid Boundaries */
+  /* Layout Boundaries */
   --container-max-width: 1440px;
   --header-height: 85px;
-  --section-padding-y: clamp(6rem, 9vw, 10rem);
+  --section-padding-y: clamp(6.5rem, 9.5vw, 10.5rem);
   --section-padding-x: clamp(1.5rem, 5vw, 4.5rem);
 
-  /* Timing & Easing */
+  /* Transitions */
   --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   --transition-normal: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   --transition-slow: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
@@ -79,6 +75,48 @@ body {
   background-color: var(--color-bg-light);
 }
 
+/* Custom Minimal Cursor (Desktop Only) */
+#custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  background-color: var(--color-orange);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease, opacity 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: var(--color-dark-navy);
+  letter-spacing: 0.1em;
+  opacity: 0;
+}
+
+body.cursor-active #custom-cursor {
+  opacity: 1;
+}
+
+#custom-cursor.cursor-hover {
+  width: 54px;
+  height: 54px;
+  background-color: rgba(11, 144, 200, 0.9);
+  color: var(--color-white);
+}
+
+#custom-cursor.cursor-cta {
+  width: 64px;
+  height: 64px;
+  background-color: rgba(251, 146, 55, 0.95);
+  color: var(--color-dark-navy);
+}
+
 img, picture, svg, video {
   display: block;
   max-width: 100%;
@@ -93,50 +131,41 @@ button, input, textarea, select {
   outline: none;
 }
 
-button {
-  cursor: pointer;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-ul, ol {
-  list-style: none;
-}
+button { cursor: pointer; }
+a { color: inherit; text-decoration: none; }
+ul, ol { list-style: none; }
 
 /* --------------------------------------------------------------------------
-   3. DRAMATIC TYPOGRAPHIC SCALING
+   3. SWISS TYPOGRAPHY & FLUID SCALING
    -------------------------------------------------------------------------- */
 h1, h2, h3, h4, h5, h6 {
   font-weight: 800;
-  line-height: 1.04;
-  letter-spacing: -0.035em;
+  line-height: 1.02;
+  letter-spacing: -0.04em;
   color: var(--color-dark-navy);
 }
 
 .text-hero {
-  font-size: clamp(3rem, 7.5vw, 6.5rem);
+  font-size: clamp(3.25rem, 8vw, 7rem);
   font-weight: 800;
-  line-height: 0.98;
-  letter-spacing: -0.04em;
+  line-height: 0.96;
+  letter-spacing: -0.045em;
   text-transform: uppercase;
 }
 
 .text-section-title {
-  font-size: clamp(2.5rem, 5vw, 4.25rem);
+  font-size: clamp(2.5rem, 5.5vw, 4.5rem);
   font-weight: 800;
-  line-height: 1.05;
-  letter-spacing: -0.035em;
+  line-height: 1.04;
+  letter-spacing: -0.04em;
   text-transform: uppercase;
 }
 
 .text-statement {
-  font-size: clamp(2rem, 4vw, 3.5rem);
-  font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: -0.03em;
+  font-size: clamp(2rem, 4.2vw, 3.75rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
   text-transform: uppercase;
 }
 
@@ -148,6 +177,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .text-eyebrow {
+  font-family: var(--font-mono);
   font-size: 0.8125rem;
   font-weight: 800;
   letter-spacing: 0.22em;
@@ -155,14 +185,14 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--color-blue);
   display: inline-flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.85rem;
   margin-bottom: 1.5rem;
 }
 
 .text-eyebrow::before {
   content: '';
   display: inline-block;
-  width: 28px;
+  width: 32px;
   height: 2px;
   background-color: var(--color-blue);
 }
@@ -182,7 +212,7 @@ h1, h2, h3, h4, h5, h6 {
 .highlight-navy { color: var(--color-navy); }
 
 /* --------------------------------------------------------------------------
-   4. LAYOUT, CONTAINERS & LEDGER GRID SYSTEM
+   4. CONTAINERS & LEDGER GRID SYSTEM
    -------------------------------------------------------------------------- */
 .container {
   width: 100%;
@@ -212,7 +242,6 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--color-white);
 }
 
-/* Ledger Line Structural Threads */
 .brand-line {
   height: 2px;
   width: 100%;
@@ -224,12 +253,12 @@ h1, h2, h3, h4, h5, h6 {
 .brand-line-subtle {
   height: 1px;
   width: 100%;
-  background: var(--color-border-subtle);
+  background: var(--color-border-grid);
   border: none;
 }
 
 /* --------------------------------------------------------------------------
-   5. HEADER & NAVIGATION
+   5. HEADER & FLOATING NAVIGATION
    -------------------------------------------------------------------------- */
 .site-header {
   position: fixed;
@@ -239,16 +268,16 @@ h1, h2, h3, h4, h5, h6 {
   height: var(--header-height);
   z-index: 1000;
   transition: background-color var(--transition-normal), border-color var(--transition-normal), box-shadow var(--transition-normal);
-  background-color: rgba(243, 247, 250, 0.88);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--color-border-subtle);
+  background-color: rgba(247, 249, 250, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--color-border-grid);
 }
 
 .site-header.scrolled {
   background-color: rgba(255, 255, 255, 0.96);
   border-bottom: 1px solid var(--color-border);
-  box-shadow: 0 4px 25px rgba(16, 30, 53, 0.05);
+  box-shadow: 0 4px 30px rgba(11, 18, 30, 0.05);
 }
 
 .header-container {
@@ -278,9 +307,7 @@ h1, h2, h3, h4, h5, h6 {
   max-height: 56px;
 }
 
-.brand-logo:hover .brand-logo-img {
-  transform: scale(1.02);
-}
+.brand-logo:hover .brand-logo-img { transform: scale(1.02); }
 
 .nav-links {
   display: flex;
@@ -320,7 +347,6 @@ h1, h2, h3, h4, h5, h6 {
   gap: 1.25rem;
 }
 
-/* Mobile Toggle */
 .mobile-nav-toggle {
   display: none;
   flex-direction: column;
@@ -345,7 +371,6 @@ h1, h2, h3, h4, h5, h6 {
 .mobile-nav-toggle.open span:nth-child(2) { opacity: 0; }
 .mobile-nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-/* Mobile Menu Panel */
 .mobile-nav-panel {
   position: fixed;
   inset: 0;
@@ -379,10 +404,14 @@ h1, h2, h3, h4, h5, h6 {
   padding-bottom: 1rem;
 }
 
-.mobile-nav-link span.num { font-size: 1rem; color: var(--color-orange); }
+.mobile-nav-link span.num {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  color: var(--color-orange);
+}
 
 /* --------------------------------------------------------------------------
-   6. BUTTONS & INTENTIONAL CONTROLS
+   6. EDITORIAL MAGNETIC BUTTONS
    -------------------------------------------------------------------------- */
 .btn-primary {
   display: inline-flex;
@@ -409,10 +438,10 @@ h1, h2, h3, h4, h5, h6 {
   background-color: var(--color-navy);
   border-color: var(--color-navy);
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(16, 30, 53, 0.25);
+  box-shadow: 0 10px 30px rgba(11, 18, 30, 0.25);
 }
 
-.btn-primary:hover .arrow { transform: translateX(5px); }
+.btn-primary:hover .arrow { transform: translateX(6px); }
 
 .btn-secondary {
   display: inline-flex;
@@ -436,10 +465,10 @@ h1, h2, h3, h4, h5, h6 {
   border-color: var(--color-blue);
   color: var(--color-blue);
 }
-.btn-secondary:hover .arrow { transform: translateX(5px); }
+.btn-secondary:hover .arrow { transform: translateX(6px); }
 
 /* --------------------------------------------------------------------------
-   7. 01 — HERO (DIGITAL BRAND INSTALLATION)
+   7. 01 — HERO (CINEMATIC FINANCIAL OPERATING INSTALLATION)
    -------------------------------------------------------------------------- */
 .hero-section {
   min-height: 100vh;
@@ -491,7 +520,7 @@ h1, h2, h3, h4, h5, h6 {
 .hero-visual-wrapper {
   position: relative;
   width: 100%;
-  height: 500px;
+  height: 520px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -501,6 +530,7 @@ h1, h2, h3, h4, h5, h6 {
   width: 100%;
   height: 100%;
   max-width: 540px;
+  transition: transform 0.1s ease-out;
 }
 
 .hero-visual-badge {
@@ -508,8 +538,8 @@ h1, h2, h3, h4, h5, h6 {
   bottom: 12px;
   right: 12px;
   background-color: rgba(255, 255, 255, 0.94);
-  backdrop-filter: blur(10px);
-  padding: 0.7rem 1.2rem;
+  backdrop-filter: blur(12px);
+  padding: 0.75rem 1.25rem;
   border: 1px solid var(--color-border);
   display: flex;
   align-items: center;
@@ -533,14 +563,14 @@ h1, h2, h3, h4, h5, h6 {
 .hero-bottom-bar {
   margin-top: 4rem;
   padding-top: 1.75rem;
-  border-top: 1px solid var(--color-border-subtle);
+  border-top: 1px solid var(--color-border-grid);
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
 /* --------------------------------------------------------------------------
-   8. 02 — BRAND INTRODUCTION (VISUAL PAUSE)
+   8. 02 — BRAND INTRODUCTION (EDITORIAL PAUSE)
    -------------------------------------------------------------------------- */
 .intro-section {
   background-color: var(--color-white);
@@ -555,7 +585,6 @@ h1, h2, h3, h4, h5, h6 {
   gap: 2.25rem;
 }
 
-/* Enormous Navy Line Animation */
 .intro-line {
   height: 4px;
   width: 100%;
@@ -564,7 +593,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* --------------------------------------------------------------------------
-   9. 03 — SERVICE EXPERIENCE (FULL-WIDTH INTERACTIVE DIRECTORY)
+   9. 03 — INTERACTIVE SERVICE DIRECTORY
    -------------------------------------------------------------------------- */
 .services-section {
   background-color: var(--color-bg-light);
@@ -643,7 +672,7 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   position: relative;
   min-height: 520px;
-  box-shadow: 0 10px 40px rgba(16, 30, 53, 0.04);
+  box-shadow: 0 12px 45px rgba(11, 18, 30, 0.04);
 }
 
 .service-info-col {
@@ -692,7 +721,7 @@ h1, h2, h3, h4, h5, h6 {
 .service-display-panel:hover .service-image-col img { transform: scale(1.04); }
 
 /* --------------------------------------------------------------------------
-   10. 04 — SIGNATURE DG SYSTEM (DEEP NAVY TRANSFORMATION ENGINE)
+   10. 04 — SIGNATURE DG SYSTEM (DEEP NAVY PIPELINE)
    -------------------------------------------------------------------------- */
 .signature-section {
   background-color: var(--color-dark-navy);
@@ -821,6 +850,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .impact-num {
+  font-family: var(--font-mono);
   font-size: 2.5rem;
   font-weight: 800;
   color: var(--color-blue);
@@ -856,7 +886,7 @@ h1, h2, h3, h4, h5, h6 {
   position: relative;
   border: 1px solid var(--color-border);
   overflow: hidden;
-  box-shadow: 0 25px 50px rgba(16, 30, 53, 0.08);
+  box-shadow: 0 25px 50px rgba(11, 18, 30, 0.08);
 }
 
 .human-image-frame img {
@@ -872,7 +902,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* --------------------------------------------------------------------------
-   13. 07 — WHO WE HELP (GIANT VERTICAL SEQUENCE)
+   13. 07 — WHO WE HELP (STRATEGIC TIMELINE)
    -------------------------------------------------------------------------- */
 .stages-section {
   background-color: var(--color-white);
@@ -931,7 +961,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* --------------------------------------------------------------------------
-   14. 08 — PROCESS (INTERACTIVE TIMELINE)
+   14. 08 — PROCESS (METHODOLOGY PATHWAY)
    -------------------------------------------------------------------------- */
 .process-section {
   background-color: var(--color-bg-light);
@@ -984,7 +1014,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* --------------------------------------------------------------------------
-   15. 09 — CREDIBILITY & PHILOSOPHY
+   15. 09 — TRUST & PROFESSIONAL STANDARDS
    -------------------------------------------------------------------------- */
 .credibility-section {
   background-color: var(--color-white);
@@ -1008,7 +1038,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* --------------------------------------------------------------------------
-   16. 10 — INSIGHTS (EDITORIAL PUBLICATION LAYOUT)
+   16. 10 — INSIGHTS (EDITORIAL MAGAZINE PUBLICATION)
    -------------------------------------------------------------------------- */
 .insights-section {
   background-color: var(--color-bg-light);
@@ -1259,8 +1289,8 @@ h1, h2, h3, h4, h5, h6 {
    -------------------------------------------------------------------------- */
 [data-reveal] {
   opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
+  transform: translateY(35px);
+  transition: opacity 0.85s var(--ease-out-expo), transform 0.85s var(--ease-out-expo);
 }
 
 [data-reveal].revealed {
@@ -1269,6 +1299,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media (max-width: 1024px) {
+  #custom-cursor { display: none !important; }
   .hero-grid,
   .human-grid,
   .guyana-grid,
@@ -1278,7 +1309,6 @@ h1, h2, h3, h4, h5, h6 {
     grid-template-columns: 1fr;
     gap: 3.5rem;
   }
-  
   .services-layout { grid-template-columns: 1fr; }
   .service-display-panel { grid-template-columns: 1fr; }
   .impact-sequence,

@@ -1,13 +1,47 @@
 /**
- * DG CONSULTANCY — VERSION 10 DIGITAL EXPERIENCE ENGINE
- * High-Performance Modular Scroll & Interactive Directory Engine
+ * DG CONSULTANCY — AWARD-WINNING LUXURY MOTION ENGINE
+ * Features: Custom Cursor Tracker, Interactive Service Directory, Parallax Vector SVG, and Scroll Observers
  */
 
 document.addEventListener('DOMContentLoaded', () => {
   'use strict';
 
   // --------------------------------------------------------------------------
-  // 1. HEADER SCROLL OBSERVER & MOBILE MENU
+  // 1. CUSTOM MINIMAL CURSOR TRACKER (DESKTOP)
+  // --------------------------------------------------------------------------
+  const cursor = document.getElementById('custom-cursor');
+  
+  if (cursor && window.innerWidth > 1024) {
+    document.body.classList.add('cursor-active');
+
+    window.addEventListener('mousemove', (e) => {
+      cursor.style.left = `${e.clientX}px`;
+      cursor.style.top = `${e.clientY}px`;
+    });
+
+    const hoverElements = document.querySelectorAll('a, button, .service-nav-item, .impact-moment');
+    hoverElements.forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        cursor.classList.add('cursor-hover');
+        if (el.classList.contains('btn-primary')) {
+          cursor.classList.add('cursor-cta');
+          cursor.textContent = 'OPEN';
+        } else if (el.classList.contains('insight-card') || el.classList.contains('featured-article-card')) {
+          cursor.textContent = 'READ';
+        } else {
+          cursor.textContent = 'VIEW';
+        }
+      });
+
+      el.addEventListener('mouseleave', () => {
+        cursor.classList.remove('cursor-hover', 'cursor-cta');
+        cursor.textContent = '';
+      });
+    });
+  }
+
+  // --------------------------------------------------------------------------
+  // 2. HEADER SCROLL OBSERVER & MOBILE MENU
   // --------------------------------------------------------------------------
   const siteHeader = document.getElementById('site-header');
   const mobileNavToggle = document.getElementById('mobile-nav-toggle');
@@ -52,13 +86,25 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --------------------------------------------------------------------------
-  // 2. 03 SERVICE DIRECTORY INTERACTIVE ENGINE
+  // 3. HERO MOUSE PARALLAX INTERACTION
+  // --------------------------------------------------------------------------
+  const heroVisual = document.querySelector('.hero-visual-svg');
+  if (heroVisual && window.innerWidth > 1024) {
+    window.addEventListener('mousemove', (e) => {
+      const mouseX = (e.clientX / window.innerWidth - 0.5) * 20;
+      const mouseY = (e.clientY / window.innerHeight - 0.5) * 20;
+      heroVisual.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
+    });
+  }
+
+  // --------------------------------------------------------------------------
+  // 4. INTERACTIVE SERVICE DIRECTORY ENGINE
   // --------------------------------------------------------------------------
   const serviceData = {
     accounting: {
       title: "Accounting",
       headline: "KNOW WHERE THE BUSINESS STANDS.",
-      copy: "Accurate financial records give you a clearer picture of performance, position, and the decisions ahead. Our accounting services ensure your numbers are structured, compliant, and insightful.",
+      copy: "Accurate financial records give you a clearer picture of performance, position, and the decisions ahead. Our accounting framework ensures compliance, structure, and actionable financial visibility.",
       items: [
         "Bookkeeping & Ledger Maintenance",
         "Financial Statements Preparation",
@@ -168,7 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --------------------------------------------------------------------------
-  // 3. 04 SIGNATURE DG SYSTEM TRANSFORMATION OBSERVER
+  // 5. SIGNATURE DG SYSTEM TRANSFORMATION OBSERVER
   // --------------------------------------------------------------------------
   const signatureVis = document.getElementById('signature-visualization');
   const signatureSection = document.getElementById('signature-section');
@@ -188,7 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --------------------------------------------------------------------------
-  // 4. GENERAL SCROLL REVEAL OBSERVER
+  // 6. GENERAL SCROLL REVEAL OBSERVER
   // --------------------------------------------------------------------------
   const revealElements = document.querySelectorAll('[data-reveal]');
   
@@ -209,7 +255,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --------------------------------------------------------------------------
-  // 5. CONTACT FORM HANDLING & FEEDBACK
+  // 7. CONTACT FORM HANDLING
   // --------------------------------------------------------------------------
   const contactForm = document.getElementById('contact-form');
   const formFeedback = document.getElementById('form-feedback');
