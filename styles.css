@@ -1293,18 +1293,47 @@ h1, h2, h3, h4, h5, h6 {
 .guyana-map-wrapper {
   background-color: var(--color-bg-light);
   border: 1px solid var(--color-border);
-  padding: 3rem;
+  padding: 2.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  min-height: 420px;
+  min-height: 440px;
+  border-radius: 12px;
 }
 
-.guyana-map-svg {
+.map-tab-btn {
+  padding: 0.65rem 1.25rem;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 4px;
+  background-color: var(--color-white);
+  border: 1.5px solid #CBD5E1;
+  color: #64748B;
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.map-tab-btn.active,
+.map-tab-btn:hover {
+  background-color: #0B1F35;
+  border-color: #0B1F35;
+  color: #FFFFFF;
+}
+
+.map-view-panel {
   width: 100%;
-  max-width: 340px;
+  height: 100%;
+}
+
+.guyana-map-svg-v2 {
+  width: 100%;
+  max-width: 360px;
   height: auto;
+  display: block;
+  margin: 0 auto;
 }
 
 /* --------------------------------------------------------------------------

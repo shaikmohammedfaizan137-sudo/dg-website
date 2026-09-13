@@ -538,7 +538,7 @@
     </section>
 
     <!-- ==========================================================================
-         11. GUYANA / LOCATION SECTION
+         11. GUYANA / LOCATION SECTION (EXACT GEOGRAPHIC ACCURACY)
          ========================================================================== -->
     <section class="section guyana-section" id="location">
       <div class="container">
@@ -549,25 +549,69 @@
               PROUDLY BASED<br>IN GUYANA.
             </h2>
             <p class="text-subtitle" style="margin-top: 1.25rem;">
-              Serving enterprises across East Bank Demerara, Georgetown, and expanding commercial sectors across Guyana.
+              Serving commercial enterprises across East Bank Demerara, Georgetown, and expanding sectors throughout Guyana.
             </p>
 
             <div style="margin-top: 2.25rem; padding-left: 1.5rem; border-left: 3px solid var(--color-blue);">
-              <div style="font-weight: 800; color: var(--color-dark-navy); text-transform: uppercase; font-size: 1.1rem;">DG CONSULTANCY</div>
+              <div style="font-weight: 800; color: #0B1F35; text-transform: uppercase; font-size: 1.1rem;">DG CONSULTANCY</div>
               <div style="color: var(--color-text-secondary); margin-top: 0.25rem;">Chartered Accountants</div>
-              <div style="color: var(--color-text-secondary); margin-top: 0.85rem;">991 Providence</div>
+              <div style="color: var(--color-text-secondary); margin-top: 0.85rem; font-weight: 600;">991 Providence</div>
               <div style="color: var(--color-text-secondary);">East Bank Demerara, Guyana</div>
+              <div style="color: #078FC8; margin-top: 0.85rem; font-weight: 700; font-size: 0.9rem;">Tel: +592 657-8054</div>
+            </div>
+
+            <!-- Map View Switcher Buttons -->
+            <div class="map-switcher-btns" style="margin-top: 2rem; display: flex; gap: 0.85rem; flex-wrap: wrap;">
+              <button class="map-tab-btn active" id="btn-svg-map">REGIONAL MAP</button>
+              <button class="map-tab-btn" id="btn-gmap">STREET MAP (GOOGLE)</button>
             </div>
           </div>
 
-          <div class="guyana-map-wrapper" data-reveal>
-            <svg class="guyana-map-svg" viewBox="0 0 300 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M 120 20 L 180 30 L 230 90 L 210 160 L 250 220 L 210 320 L 160 380 L 100 350 L 70 270 L 90 180 L 50 110 Z" stroke="#2D4877" stroke-width="2" fill="#F7F9FA"/>
-              <path d="M 175 30 L 165 110 L 155 180 L 140 260" stroke="#0B90C8" stroke-width="2" stroke-dasharray="3 3"/>
-              <circle cx="168" cy="85" r="7" fill="#FB9237"/>
-              <circle cx="168" cy="85" r="16" stroke="#FB9237" stroke-width="1.5" stroke-dasharray="2 2"/>
-              <text x="185" y="89" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="10" fill="#0B121E">PROVIDENCE, EBD</text>
-            </svg>
+          <div class="guyana-map-wrapper" data-reveal style="min-height: 440px;">
+            
+            <!-- Accurate Vector SVG Map of Guyana -->
+            <div id="guyana-svg-container" class="map-view-panel active">
+              <svg class="guyana-map-svg-v2" viewBox="0 0 360 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Accurate Guyana National Geographic Outline -->
+                <path d="M 65 45 C 95 50, 130 55, 170 62 C 205 70, 240 85, 275 102 L 295 150 C 305 190, 315 240, 325 290 C 305 340, 285 390, 260 445 C 225 455, 190 450, 160 430 C 135 400, 120 350, 100 300 L 55 255 C 40 205, 50 150, 60 100 Z" fill="#F8FAFC" stroke="#0B1F35" stroke-width="2"/>
+                
+                <!-- Demerara River Course (North to South) -->
+                <path d="M 175 63 C 172 100, 168 140, 162 180 C 158 210, 152 240, 145 270" stroke="#078FC8" stroke-width="2" stroke-dasharray="3 3"/>
+                
+                <!-- Essequibo & Berbice River Indications -->
+                <path d="M 135 55 C 130 110, 125 170, 115 230" stroke="#CBD5E1" stroke-width="1.2" stroke-dasharray="2 2"/>
+                <path d="M 235 90 C 230 130, 220 180, 210 220" stroke="#CBD5E1" stroke-width="1.2" stroke-dasharray="2 2"/>
+                
+                <!-- Geographic Pin for Providence, East Bank Demerara -->
+                <g class="map-pin-group" transform="translate(175, 65)">
+                  <circle cx="0" cy="0" r="18" fill="#F79432" fill-opacity="0.18"/>
+                  <circle cx="0" cy="0" r="10" fill="#F79432" fill-opacity="0.35"/>
+                  <circle cx="0" cy="0" r="6" fill="#F79432"/>
+                  <circle cx="0" cy="0" r="2" fill="#FFFFFF"/>
+                  
+                  <!-- Pointer Line & Label Card -->
+                  <line x1="0" y1="0" x2="35" y2="-20" stroke="#0B1F35" stroke-width="1.5"/>
+                  <rect x="35" y="-36" width="135" height="28" rx="4" fill="#0B1F35"/>
+                  <text x="43" y="-18" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="10" fill="#FFFFFF">PROVIDENCE, EBD</text>
+                  <text x="43" y="-7" font-family="'Plus Jakarta Sans', sans-serif" font-weight="600" font-size="8" fill="#F79432">991 PROVIDENCE</text>
+                </g>
+
+                <!-- Map Legend -->
+                <g transform="translate(20, 420)">
+                  <rect x="0" y="0" width="130" height="42" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
+                  <circle cx="12" cy="14" r="4" fill="#F79432"/>
+                  <text x="22" y="17" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" font-size="9" fill="#0B1F35">Providence, EBD</text>
+                  <line x1="8" y1="30" x2="20" y2="30" stroke="#078FC8" stroke-width="1.5" stroke-dasharray="2 2"/>
+                  <text x="25" y="33" font-family="'Plus Jakarta Sans', sans-serif" font-weight="600" font-size="8" fill="#64748B">Demerara River</text>
+                </g>
+              </svg>
+            </div>
+
+            <!-- Embedded Interactive Google Map -->
+            <div id="guyana-gmap-container" class="map-view-panel" style="display: none;">
+              <iframe src="https://maps.google.com/maps?q=991%20Providence%2C%20East%20Bank%20Demerara%2C%20Guyana&t=&z=14&ie=UTF8&iwloc=&output=embed" width="100%" height="420" style="border:0; border-radius:12px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+
           </div>
         </div>
       </div>

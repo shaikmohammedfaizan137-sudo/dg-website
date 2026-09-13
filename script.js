@@ -297,4 +297,28 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 900);
     });
   }
+
+  // --------------------------------------------------------------------------
+  // 8. MAP VIEW SWITCHER (REGIONAL VS GOOGLE STREET MAP)
+  // --------------------------------------------------------------------------
+  const btnSvgMap = document.getElementById('btn-svg-map');
+  const btnGmap = document.getElementById('btn-gmap');
+  const svgMapPanel = document.getElementById('guyana-svg-container');
+  const gmapPanel = document.getElementById('guyana-gmap-container');
+
+  if (btnSvgMap && btnGmap && svgMapPanel && gmapPanel) {
+    btnSvgMap.addEventListener('click', () => {
+      btnSvgMap.classList.add('active');
+      btnGmap.classList.remove('active');
+      svgMapPanel.style.display = 'block';
+      gmapPanel.style.display = 'none';
+    });
+
+    btnGmap.addEventListener('click', () => {
+      btnGmap.classList.add('active');
+      btnSvgMap.classList.remove('active');
+      gmapPanel.style.display = 'block';
+      svgMapPanel.style.display = 'none';
+    });
+  }
 });
