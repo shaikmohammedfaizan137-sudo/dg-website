@@ -1,6 +1,7 @@
 /**
- * DG CONSULTANCY — AWARD-WINNING LUXURY MOTION ENGINE
- * Features: Custom Cursor Tracker, Interactive Service Directory, Parallax Vector SVG, and Scroll Observers
+ * DG CONSULTANCY — FINANCIAL BRAND INTERACTION ENGINE
+ * Features: Custom Cursor, Interactive Service Directory, Business Stages Engine, 
+ * Regional Map Switcher, and Scroll Observers
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -19,14 +20,13 @@ document.addEventListener('DOMContentLoaded', () => {
       cursor.style.top = `${e.clientY}px`;
     });
 
-    const hoverElements = document.querySelectorAll('a, button, .service-nav-item, .impact-moment');
+    const hoverElements = document.querySelectorAll('a, button, .service-tab-item, .stage-tab, .why-card-v3, .pipeline-step-card');
     hoverElements.forEach(el => {
       el.addEventListener('mouseenter', () => {
         cursor.classList.add('cursor-hover');
-        if (el.classList.contains('btn-primary')) {
-          cursor.classList.add('cursor-cta');
+        if (el.classList.contains('btn-rect-primary')) {
           cursor.textContent = 'OPEN';
-        } else if (el.classList.contains('insight-card') || el.classList.contains('featured-article-card')) {
+        } else if (el.classList.contains('featured-insight-card-v3') || el.classList.contains('side-insight-card-v3')) {
           cursor.textContent = 'READ';
         } else {
           cursor.textContent = 'VIEW';
@@ -34,21 +34,21 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       el.addEventListener('mouseleave', () => {
-        cursor.classList.remove('cursor-hover', 'cursor-cta');
+        cursor.classList.remove('cursor-hover');
         cursor.textContent = '';
       });
     });
   }
 
   // --------------------------------------------------------------------------
-  // 2. HEADER SCROLL OBSERVER & MOBILE MENU
+  // 2. HEADER SCROLL OBSERVER & MOBILE MENU DRAWER
   // --------------------------------------------------------------------------
   const siteHeader = document.getElementById('site-header');
   const mobileNavToggle = document.getElementById('mobile-nav-toggle');
   const mobileNavPanel = document.getElementById('mobile-nav-panel');
 
   const handleHeaderScroll = () => {
-    if (window.scrollY > 40) {
+    if (window.scrollY > 30) {
       siteHeader.classList.add('scrolled');
     } else {
       siteHeader.classList.remove('scrolled');
@@ -86,28 +86,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --------------------------------------------------------------------------
-  // 3. HERO MOUSE PARALLAX (HERO V2 ARCHITECTURAL GEOMETRY)
-  // --------------------------------------------------------------------------
-  const heroPhotoCanvas = document.querySelector('.hero-photo-canvas-v2');
-  const dgBgSvg = document.querySelector('.dg-bg-geometry-svg');
-  
-  if (heroPhotoCanvas && window.innerWidth > 1024) {
-    window.addEventListener('mousemove', (e) => {
-      const mouseX = (e.clientX / window.innerWidth - 0.5) * 12;
-      const mouseY = (e.clientY / window.innerHeight - 0.5) * 12;
-      
-      heroPhotoCanvas.style.transform = `translate3d(${mouseX * 0.4}px, ${mouseY * 0.4}px, 0)`;
-      if (dgBgSvg) {
-        dgBgSvg.style.transform = `translate3d(${-mouseX * 0.8}px, ${-mouseY * 0.8}px, 0)`;
-      }
-    });
-  }
-
-  // --------------------------------------------------------------------------
-  // 4. INTERACTIVE SERVICE DIRECTORY ENGINE
+  // 3. INTERACTIVE SERVICE DIRECTORY ENGINE (5 CORE SERVICES)
   // --------------------------------------------------------------------------
   const serviceData = {
     accounting: {
+      tag: "CORE PRACTICE 01",
       title: "Accounting",
       headline: "KNOW WHERE THE BUSINESS STANDS.",
       copy: "Accurate financial records give you a clearer picture of performance, position, and the decisions ahead. Our accounting framework ensures compliance, structure, and actionable financial visibility.",
@@ -122,6 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
       image: "assets/images/service-accounting.jpg"
     },
     auditing: {
+      tag: "CORE PRACTICE 02",
       title: "Auditing",
       headline: "CONFIDENCE IN THE NUMBERS.",
       copy: "Professional audit support designed to provide greater confidence in financial information and strengthen internal control across your operational ecosystem.",
@@ -136,9 +120,10 @@ document.addEventListener('DOMContentLoaded', () => {
       image: "assets/images/service-auditing.jpg"
     },
     taxation: {
+      tag: "CORE PRACTICE 03",
       title: "Taxation",
       headline: "STAY AHEAD OF OBLIGATIONS.",
-      copy: "Practical tax support that helps businesses understand their responsibilities, prepare accurately, and avoid unnecessary surprises or penalties.",
+      copy: "Practical tax support that helps businesses understand their responsibilities, prepare accurately, and avoid unnecessary surprises or penalties with GRA.",
       items: [
         "Corporate & Individual Tax Return Filing",
         "VAT Registration, Filings & Reconciliations",
@@ -150,6 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
       image: "assets/images/service-taxation.jpg"
     },
     payroll: {
+      tag: "CORE PRACTICE 04",
       title: "Payroll",
       headline: "ONE LESS THING TO WORRY ABOUT.",
       copy: "Reliable payroll administration that keeps an essential part of your business running accurately, confidentially, and consistently every single cycle.",
@@ -164,6 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
       image: "assets/images/service-payroll.jpg"
     },
     consulting: {
+      tag: "CORE PRACTICE 05",
       title: "Consulting",
       headline: "WHEN NUMBERS NEED A STRATEGY.",
       copy: "Financial and business guidance when an important strategic decision requires more than a spreadsheet. We bridge financial intelligence with enterprise strategy.",
@@ -179,7 +166,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  const navItems = document.querySelectorAll('.service-nav-item');
+  const serviceTabs = document.querySelectorAll('.service-tab-item');
+  const panelTag = document.getElementById('service-panel-tag');
   const panelHeadline = document.getElementById('service-panel-headline');
   const panelCopy = document.getElementById('service-panel-copy');
   const panelList = document.getElementById('service-panel-list');
@@ -187,23 +175,28 @@ document.addEventListener('DOMContentLoaded', () => {
   const panelImg = document.getElementById('service-panel-img');
   const displayPanel = document.getElementById('service-display-panel');
 
-  if (navItems.length > 0 && displayPanel) {
-    navItems.forEach(item => {
-      item.addEventListener('click', () => {
-        const serviceKey = item.getAttribute('data-service');
-        const data = serviceData[serviceKey];
+  if (serviceTabs.length > 0 && displayPanel) {
+    serviceTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const key = tab.getAttribute('data-service');
+        const data = serviceData[key];
         if (!data) return;
 
-        navItems.forEach(nav => nav.classList.remove('active'));
-        item.classList.add('active');
+        serviceTabs.forEach(t => {
+          t.classList.remove('active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
 
         displayPanel.style.opacity = '0.35';
 
         setTimeout(() => {
+          if (panelTag) panelTag.textContent = data.tag;
           if (panelHeadline) panelHeadline.textContent = data.headline;
           if (panelCopy) panelCopy.textContent = data.copy;
           if (panelList) {
-            panelList.innerHTML = data.items.map(i => `<div class="service-included-item">${i}</div>`).join('');
+            panelList.innerHTML = data.items.map(i => `<div class="service-list-item">${i}</div>`).join('');
           }
           if (panelCta) {
             panelCta.textContent = data.ctaText;
@@ -220,23 +213,111 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --------------------------------------------------------------------------
-  // 5. SIGNATURE DG SYSTEM TRANSFORMATION OBSERVER
+  // 4. BUSINESS STAGES SWITCHER (STARTING, GROWING, ESTABLISHED, CHANGING)
   // --------------------------------------------------------------------------
-  const signatureVis = document.getElementById('signature-visualization');
-  const signatureSection = document.getElementById('signature-section');
+  const stageData = {
+    starting: {
+      tag: "BUSINESS STAGE 01",
+      headline: "BUILD THE FINANCIAL FOUNDATION CORRECTLY.",
+      copy: "Early decisions set the trajectory for long-term commercial growth. We help new enterprises establish structured chart of accounts, tax registrations, NIS setup, and clear compliance procedures right from inception.",
+      highlights: [
+        "&bull; Business Incorporation & Regulatory Filings in Guyana",
+        "&bull; GRA Tax & NIS Employer Registration",
+        "&bull; Accounting System Setup & Chart of Accounts"
+      ],
+      image: "assets/images/approach-precision.jpg"
+    },
+    growing: {
+      tag: "BUSINESS STAGE 02",
+      headline: "KEEP PACE WITH INCREASING COMPLEXITY.",
+      copy: "As revenue and headcount expand, informal bookkeeping breaks down. We introduce monthly management accounts, cash flow forecasting, inventory controls, and payroll automation.",
+      highlights: [
+        "&bull; Monthly Management Accounting & Cash Flow Radar",
+        "&bull; Automated Confidential Payroll Administration",
+        "&bull; Working Capital Optimization & Cost Analysis"
+      ],
+      image: "assets/images/hero-executive-guyana.jpg"
+    },
+    established: {
+      tag: "BUSINESS STAGE 03",
+      headline: "IMPROVE REPORTING, CONTROLS & VISIBILITY.",
+      copy: "For mature enterprises requiring rigorous governance and statutory audit readiness. We refine internal control frameworks, conduct independent audits, and ensure total compliance.",
+      highlights: [
+        "&bull; Statutory Audits & Financial Statement Assurance",
+        "&bull; Internal Control & Risk Mitigation Reviews",
+        "&bull; Tax Compliance Planning & Advisory"
+      ],
+      image: "assets/images/about-hands.jpg"
+    },
+    changing: {
+      tag: "BUSINESS STAGE 04",
+      headline: "NAVIGATE RESTRUCTURING & EXPANSION.",
+      copy: "When embarking on acquisitions, joint ventures, or major capital investments. We provide financial modeling, valuation analysis, entity structuring, and commercial advice.",
+      highlights: [
+        "&bull; Financial Modeling & Feasibility Planning",
+        "&bull; Commercial Joint Venture Advisory in Guyana",
+        "&bull; Corporate Restructuring & Tax Strategy"
+      ],
+      image: "assets/images/service-consulting.jpg"
+    }
+  };
 
-  if (signatureSection && signatureVis) {
-    const signatureObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          signatureVis.classList.add('aligned');
-        } else {
-          signatureVis.classList.remove('aligned');
-        }
+  const stageTabs = document.querySelectorAll('.stage-tab');
+  const stageTag = document.getElementById('stage-card-tag');
+  const stageHeadline = document.getElementById('stage-card-headline');
+  const stageCopy = document.getElementById('stage-card-copy');
+  const stageHighlights = document.getElementById('stage-card-highlights');
+  const stageImg = document.getElementById('stage-card-img');
+  const stageCard = document.getElementById('stage-display-card');
+
+  if (stageTabs.length > 0 && stageCard) {
+    stageTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const key = tab.getAttribute('data-stage');
+        const data = stageData[key];
+        if (!data) return;
+
+        stageTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+
+        stageCard.style.opacity = '0.35';
+
+        setTimeout(() => {
+          if (stageTag) stageTag.textContent = data.tag;
+          if (stageHeadline) stageHeadline.textContent = data.headline;
+          if (stageCopy) stageCopy.textContent = data.copy;
+          if (stageHighlights) {
+            stageHighlights.innerHTML = data.highlights.map(h => `<div class="highlight-item">${h}</div>`).join('');
+          }
+          if (stageImg) stageImg.src = data.image;
+          stageCard.style.opacity = '1';
+        }, 140);
       });
-    }, { threshold: 0.3 });
+    });
+  }
 
-    signatureObserver.observe(signatureSection);
+  // --------------------------------------------------------------------------
+  // 5. REGIONAL MAP VS GOOGLE STREET MAP SWITCHER
+  // --------------------------------------------------------------------------
+  const btnSvgMap = document.getElementById('btn-svg-map');
+  const btnGmap = document.getElementById('btn-gmap');
+  const svgMapPanel = document.getElementById('guyana-svg-container');
+  const gmapPanel = document.getElementById('guyana-gmap-container');
+
+  if (btnSvgMap && btnGmap && svgMapPanel && gmapPanel) {
+    btnSvgMap.addEventListener('click', () => {
+      btnSvgMap.classList.add('active');
+      btnGmap.classList.remove('active');
+      svgMapPanel.style.display = 'block';
+      gmapPanel.style.display = 'none';
+    });
+
+    btnGmap.addEventListener('click', () => {
+      btnGmap.classList.add('active');
+      btnSvgMap.classList.remove('active');
+      gmapPanel.style.display = 'block';
+      svgMapPanel.style.display = 'none';
+    });
   }
 
   // --------------------------------------------------------------------------
@@ -271,7 +352,7 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       
       const submitBtn = contactForm.querySelector('button[type="submit"]');
-      const originalText = submitBtn ? submitBtn.innerHTML : 'START THE CONVERSATION →';
+      const originalText = submitBtn ? submitBtn.innerHTML : 'SEND ENQUIRY →';
       
       if (submitBtn) {
         submitBtn.disabled = true;
@@ -282,7 +363,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (formFeedback) {
           formFeedback.style.display = 'block';
           formFeedback.innerHTML = `
-            <div style="padding: 1.25rem; background-color: #EEF7EE; border-left: 4px solid #2E7D32; color: #1B5E20; font-size: 0.9rem; font-weight: 700;">
+            <div style="padding: 1.15rem; background-color: #EEF7EE; border-left: 4px solid #2E7D32; color: #1B5E20; font-size: 0.875rem; font-weight: 700; border-radius: 4px;">
               Thank you. Your consultation request has been received. Our team will respond within 24 hours.
             </div>
           `;
@@ -295,30 +376,6 @@ document.addEventListener('DOMContentLoaded', () => {
           submitBtn.innerHTML = originalText;
         }
       }, 900);
-    });
-  }
-
-  // --------------------------------------------------------------------------
-  // 8. MAP VIEW SWITCHER (REGIONAL VS GOOGLE STREET MAP)
-  // --------------------------------------------------------------------------
-  const btnSvgMap = document.getElementById('btn-svg-map');
-  const btnGmap = document.getElementById('btn-gmap');
-  const svgMapPanel = document.getElementById('guyana-svg-container');
-  const gmapPanel = document.getElementById('guyana-gmap-container');
-
-  if (btnSvgMap && btnGmap && svgMapPanel && gmapPanel) {
-    btnSvgMap.addEventListener('click', () => {
-      btnSvgMap.classList.add('active');
-      btnGmap.classList.remove('active');
-      svgMapPanel.style.display = 'block';
-      gmapPanel.style.display = 'none';
-    });
-
-    btnGmap.addEventListener('click', () => {
-      btnGmap.classList.add('active');
-      btnSvgMap.classList.remove('active');
-      gmapPanel.style.display = 'block';
-      svgMapPanel.style.display = 'none';
     });
   }
 });

@@ -7,10 +7,14 @@
   <meta name="description" content="Editorial financial, tax, and accounting advisory insights for business leaders in Guyana.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
 </head>
 <body>
+
+  <!-- Custom Cursor -->
+  <div id="custom-cursor" aria-hidden="true"></div>
 
   <header class="site-header" id="site-header">
     <div class="container header-container">
@@ -19,88 +23,90 @@
       </a>
 
       <nav class="nav-links">
-        <a href="index.html#services" class="nav-link">Services</a>
-        <a href="index.html#why-dg" class="nav-link">Why DG</a>
-        <a href="about.html" class="nav-link">About</a>
-        <a href="index.html#approach" class="nav-link">Approach</a>
-        <a href="insights.html" class="nav-link active">Insights</a>
-        <a href="contact.html" class="nav-link">Contact</a>
+        <a href="index.html#services" class="nav-link">SERVICES</a>
+        <a href="index.html#why-dg" class="nav-link">WHY DG</a>
+        <a href="about.html" class="nav-link">ABOUT</a>
+        <a href="index.html#approach" class="nav-link">APPROACH</a>
+        <a href="insights.html" class="nav-link active">INSIGHTS</a>
+        <a href="contact.html" class="nav-link">CONTACT</a>
       </nav>
 
       <div class="header-cta-group">
-        <a href="contact.html" class="btn-primary">BOOK A CONSULTATION <span class="arrow">&rarr;</span></a>
+        <a href="contact.html" class="btn-rect-primary header-btn">BOOK A CONSULTATION &rarr;</a>
+        <button class="menu-circle-btn" id="mobile-nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+        </button>
       </div>
     </div>
   </header>
 
-  <main style="padding-top: calc(var(--header-height) + 2rem);">
+  <!-- Mobile Menu Panel -->
+  <div class="mobile-nav-panel" id="mobile-nav-panel" aria-hidden="true">
+    <div class="mobile-nav-links">
+      <a href="index.html#services" class="mobile-nav-link"><span class="title">Services</span><span class="num">01</span></a>
+      <a href="index.html#why-dg" class="mobile-nav-link"><span class="title">Why DG</span><span class="num">02</span></a>
+      <a href="about.html" class="mobile-nav-link"><span class="title">About</span><span class="num">03</span></a>
+      <a href="index.html#approach" class="mobile-nav-link"><span class="title">Approach</span><span class="num">04</span></a>
+      <a href="insights.html" class="mobile-nav-link"><span class="title">Insights</span><span class="num">05</span></a>
+      <a href="contact.html" class="mobile-nav-link"><span class="title">Contact</span><span class="num">06</span></a>
+    </div>
+  </div>
+
+  <main style="padding-top: calc(76px + 3rem);">
     
-    <section class="section section-light">
+    <section class="section">
       <div class="container">
-        <span class="text-eyebrow">EDITORIAL RESOURCES</span>
-        <h1 class="text-hero" style="font-size: clamp(2.5rem, 5vw, 4.25rem);">WORTH KNOWING.</h1>
-        <p class="text-subtitle" style="max-width: 680px; margin-top: 1.5rem;">
+        <span class="text-eyebrow">FINANCIAL INTELLIGENCE</span>
+        <h1 class="text-section-title-v3">WORTH KNOWING<span class="dot-orange-v3">.</span></h1>
+        <p class="text-subtitle-v3" style="margin-top: 1.5rem;">
           Practical accounting, taxation, and financial perspectives for business executives and founders operating in Guyana.
         </p>
       </div>
     </section>
 
-    <section class="section section-pale">
+    <section class="section insights-section-v3" style="padding-top: 0;">
       <div class="container">
-        <div class="insights-grid" style="margin-top: 0;">
-          <article class="insight-card" id="article-1">
-            <div class="insight-img-wrapper">
+        <div class="insights-grid-v3">
+          
+          <article class="featured-insight-card-v3" id="article-1">
+            <div class="insight-photo-wrapper">
               <img src="assets/images/insight-finance.jpg" alt="Financial reporting">
+              <span class="insight-cat-tag">FINANCIAL MANAGEMENT</span>
             </div>
-            <div class="insight-content">
-              <div>
-                <div class="insight-meta">
-                  <span class="insight-category">ACCOUNTING</span>
-                  <span class="text-micro">5 MIN READ</span>
-                </div>
-                <h3 class="insight-title" style="margin-top: 0.75rem;">What your monthly accounts should tell you</h3>
+            <div class="insight-body-v3">
+              <div class="insight-meta">
+                <span>READ TIME: 5 MINS</span>
+                <span>BY DG ADVISORY</span>
               </div>
-              <p class="text-subtitle" style="font-size: 0.875rem;">
+              <h3 class="insight-title-v3">Why monthly management accounts matter more than annual tax returns</h3>
+              <p class="insight-copy-v3">
                 Monthly management accounts aren't just a record of past income. They are your forward-looking radar for gross margins, debtor collections, and upcoming working capital constraints.
               </p>
             </div>
           </article>
 
-          <article class="insight-card" id="article-2">
-            <div class="insight-img-wrapper">
-              <img src="assets/images/insight-tax.jpg" alt="Tax compliance">
-            </div>
-            <div class="insight-content">
-              <div>
-                <div class="insight-meta">
-                  <span class="insight-category">TAXATION</span>
-                  <span class="text-micro">4 MIN READ</span>
-                </div>
-                <h3 class="insight-title" style="margin-top: 0.75rem;">Preparing for tax season before it becomes urgent</h3>
+          <div class="side-insights-col-v3">
+            
+            <article class="side-insight-card-v3" id="article-2">
+              <div class="side-insight-meta">
+                <span class="tag-orange">TAXATION</span>
+                <span>4 MIN READ</span>
               </div>
-              <p class="text-subtitle" style="font-size: 0.875rem;">
-                Leaving corporate tax compliance to the statutory deadline creates stress and unnecessary penalty exposure. Maintaining clean quarterly reconciliations keeps your firm in total control.
-              </p>
-            </div>
-          </article>
+              <h3 class="side-insight-title">Preparing for tax season before it becomes urgent</h3>
+              <p class="side-insight-copy">Leaving corporate tax compliance to the statutory deadline creates stress and unnecessary penalty exposure. Maintaining clean quarterly reconciliations keeps your firm in total control.</p>
+            </article>
 
-          <article class="insight-card" id="article-3">
-            <div class="insight-img-wrapper">
-              <img src="assets/images/insight-records.jpg" alt="Financial metrics">
-            </div>
-            <div class="insight-content">
-              <div>
-                <div class="insight-meta">
-                  <span class="insight-category">CONSULTING</span>
-                  <span class="text-micro">6 MIN READ</span>
-                </div>
-                <h3 class="insight-title" style="margin-top: 0.75rem;">Five numbers every business owner should know</h3>
+            <article class="side-insight-card-v3" id="article-3">
+              <div class="side-insight-meta">
+                <span class="tag-blue">STRATEGY</span>
+                <span>6 MIN READ</span>
               </div>
-              <p class="text-subtitle" style="font-size: 0.875rem;">
-                Top-line revenue is vanity; net operating cash flow, gross margin percentage, debtor turnover days, current ratio, and debt service coverage dictate true corporate solvency.
-              </p>
-            </div>
-          </article>
+              <h3 class="side-insight-title">Five numbers every business owner in Guyana should know</h3>
+              <p class="side-insight-copy">Beyond top-line revenue, these five metrics dictate true solvency, liquidity, and enterprise valuation.</p>
+            </article>
+
+          </div>
+
         </div>
       </div>
     </section>
@@ -109,10 +115,9 @@
 
   <footer class="site-footer">
     <div class="container" style="text-align: center; color: #94A3B8; font-size: 0.85rem;">
-      &copy; 2026 DG Consultancy. Chartered Accountants. Providence, EBD, Guyana.
+      CLEARER NUMBERS. BETTER DECISIONS. &bull; &copy; 2026 DG Consultancy. All rights reserved.
     </div>
   </footer>
 
-  <script src="script.js"></script>
 </body>
 </html>
