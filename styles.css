@@ -1517,7 +1517,178 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* --------------------------------------------------------------------------
-   20. REVEAL UTILITIES & RESPONSIVE BREAKPOINTS
+   20. CREATIVE ANIMATIONS & VISUAL ATTRACTIONS
+   -------------------------------------------------------------------------- */
+.header-scroll-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--color-blue) 0%, var(--color-orange) 100%);
+  box-shadow: 0 0 12px rgba(7, 143, 200, 0.6);
+  transition: width 0.1s linear;
+  z-index: 101;
+}
+
+.hero-section-v3 {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-particle-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.55;
+}
+
+.eyebrow-beacon {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--color-orange);
+  box-shadow: 0 0 0 0 rgba(247, 148, 50, 0.7);
+  animation: beaconPulse 2s infinite;
+  margin-right: 0.55rem;
+  vertical-align: middle;
+}
+
+@keyframes beaconPulse {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(247, 148, 50, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(247, 148, 50, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(247, 148, 50, 0); }
+}
+
+.hero-telemetry-hud {
+  position: absolute;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  background: rgba(11, 31, 53, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(7, 143, 200, 0.35);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+  padding: 1.15rem 1.35rem;
+  border-radius: 8px;
+  color: var(--color-white);
+  width: calc(100% - 3rem);
+  max-width: 280px;
+  z-index: 5;
+  animation: hudFloat 4s ease-in-out infinite alternate;
+}
+
+@keyframes hudFloat {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-8px); }
+}
+
+.hud-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+}
+
+.hud-pulse-dot {
+  width: 7px;
+  height: 7px;
+  background-color: #10B981;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #10B981;
+  animation: beaconPulse 1.8s infinite;
+}
+
+.hud-label { color: #94A3B8; font-weight: 700; }
+.hud-status { margin-left: auto; color: #10B981; font-weight: 800; }
+
+.hud-metric-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #CBD5E1;
+  margin-bottom: 0.25rem;
+}
+
+.hud-metric-val { font-family: var(--font-mono); color: var(--color-blue); }
+
+.hud-progress-track {
+  width: 100%;
+  height: 4px;
+  background-color: rgba(255, 255, 255, 0.12);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.hud-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-blue), #38BDF8);
+  border-radius: 2px;
+  transition: width 1.5s ease-out;
+}
+
+.hud-progress-fill.orange {
+  background: linear-gradient(90deg, var(--color-orange), #FBBF24);
+}
+
+.spotlight-card {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.35s var(--ease-out-expo), box-shadow 0.35s var(--ease-out-expo), border-color 0.35s ease;
+}
+
+.spotlight-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: radial-gradient(
+    500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(7, 143, 200, 0.45),
+    transparent 40%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 3;
+}
+
+.spotlight-card:hover::before {
+  opacity: 1;
+}
+
+.spotlight-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(11, 31, 53, 0.12);
+}
+
+.pulse-node {
+  animation: nodeGlow 2.5s infinite alternate ease-in-out;
+}
+
+@keyframes nodeGlow {
+  0% { r: 4px; fill: #F79432; filter: drop-shadow(0 0 2px #F79432); }
+  100% { r: 7px; fill: #38BDF8; filter: drop-shadow(0 0 10px #078FC8); }
+}
+
+/* --------------------------------------------------------------------------
+   21. REVEAL UTILITIES & RESPONSIVE BREAKPOINTS
    -------------------------------------------------------------------------- */
 [data-reveal] {
   opacity: 0;

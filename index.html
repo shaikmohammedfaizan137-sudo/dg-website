@@ -70,6 +70,8 @@
         </button>
       </div>
     </div>
+    <!-- Scroll Progress Indicator -->
+    <div class="header-scroll-progress" id="header-scroll-progress"></div>
   </header>
 
   <!-- Mobile Menu Panel Drawer -->
@@ -93,11 +95,15 @@
          01. HERO (DISCOVER: "NUMBERS THAT MOVE BUSINESS.")
          ========================================================================== -->
     <section class="hero-section-v3" id="hero">
+      <!-- Ambient Financial Particle Grid Canvas -->
+      <canvas class="hero-particle-canvas" id="hero-particle-canvas" aria-hidden="true"></canvas>
+
       <div class="container hero-container-v3">
         
         <!-- Left Side: Editorial Content (45% width) -->
         <div class="hero-content-v3" data-reveal>
           <div class="hero-eyebrow-v3">
+            <span class="eyebrow-beacon"></span>
             <span class="eyebrow-text-v3">CHARTERED ACCOUNTANTS &bull; GUYANA</span>
           </div>
 
@@ -121,11 +127,11 @@
         </div>
 
         <!-- Right Side: Large Visual Composition (55% width) -->
-        <div class="hero-visual-v3" data-reveal>
+        <div class="hero-visual-v3 spotlight-card" data-reveal>
           <!-- Interlocking DG Brand Line Bridge -->
           <svg class="dg-visual-bridge-svg" viewBox="0 0 500 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M 0 50 Q 150 10, 300 50 T 500 50" stroke="#078FC8" stroke-width="1.5" stroke-dasharray="4 4"/>
-            <circle cx="250" cy="30" r="4" fill="#F79432"/>
+            <path class="animated-path" d="M 0 50 Q 150 10, 300 50 T 500 50" stroke="#078FC8" stroke-width="1.5" stroke-dasharray="4 4"/>
+            <circle cx="250" cy="30" r="5" fill="#F79432" class="pulse-node"/>
           </svg>
 
           <div class="hero-photo-frame-v3">
@@ -134,6 +140,31 @@
             <div class="hero-photo-badge-v3">
               <span class="badge-tag-v3">CONNECTED INTELLIGENCE</span>
               <span class="badge-title-v3">Numbers &rarr; Decisions &rarr; Growth</span>
+            </div>
+
+            <!-- Glassmorphic Financial Telemetry HUD Badge -->
+            <div class="hero-telemetry-hud" aria-hidden="true">
+              <div class="hud-header">
+                <span class="hud-pulse-dot"></span>
+                <span class="hud-label">LIVE FINANCIAL RADAR</span>
+                <span class="hud-status">ACTIVE</span>
+              </div>
+              <div class="hud-metrics">
+                <div class="hud-metric-row">
+                  <span class="hud-metric-name">GRA TAX COMPLIANCE</span>
+                  <span class="hud-metric-val" data-counter="100">100%</span>
+                </div>
+                <div class="hud-progress-track">
+                  <div class="hud-progress-fill" style="width: 100%;"></div>
+                </div>
+                <div class="hud-metric-row" style="margin-top: 0.5rem;">
+                  <span class="hud-metric-name">DECISION SPEED</span>
+                  <span class="hud-metric-val" data-counter="45">+45%</span>
+                </div>
+                <div class="hud-progress-track">
+                  <div class="hud-progress-fill orange" style="width: 85%;"></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -237,7 +268,7 @@
 
           <!-- Right: 3 Core Principles -->
           <div class="intro-content-col" data-reveal>
-            <div class="principle-card">
+            <div class="principle-card spotlight-card">
               <div class="principle-num">01</div>
               <div class="principle-body">
                 <h3 class="principle-title">PRECISION</h3>
@@ -245,7 +276,7 @@
               </div>
             </div>
 
-            <div class="principle-card">
+            <div class="principle-card spotlight-card">
               <div class="principle-num">02</div>
               <div class="principle-body">
                 <h3 class="principle-title">PERSPECTIVE</h3>
@@ -253,7 +284,7 @@
               </div>
             </div>
 
-            <div class="principle-card">
+            <div class="principle-card spotlight-card">
               <div class="principle-num">03</div>
               <div class="principle-body">
                 <h3 class="principle-title">DIRECTION</h3>

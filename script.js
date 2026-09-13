@@ -342,40 +342,136 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --------------------------------------------------------------------------
-  // 7. CONTACT FORM HANDLING
+  // 8. HEADER SCROLL PROGRESS BAR
   // --------------------------------------------------------------------------
-  const contactForm = document.getElementById('contact-form');
-  const formFeedback = document.getElementById('form-feedback');
+  const scrollProgress = document.getElementById('header-scroll-progress');
+  if (scrollProgress) {
+    window.addEventListener('scroll', () => {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      scrollProgress.style.width = `${scrolled}%`;
+    }, { passive: true });
+  }
 
-  if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      
-      const submitBtn = contactForm.querySelector('button[type="submit"]');
-      const originalText = submitBtn ? submitBtn.innerHTML : 'SEND ENQUIRY →';
-      
-      if (submitBtn) {
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = 'PROCESSING ENQUIRY...';
+  // --------------------------------------------------------------------------
+  // 9. HERO AMBIENT PARTICLE GRID CANVAS
+  // --------------------------------------------------------------------------
+  const heroCanvas = document.getElementById('hero-particle-canvas');
+  if (heroCanvas) {
+    const ctx = heroCanvas.getContext('2d');
+    let width = heroCanvas.width = heroCanvas.parentElement.offsetWidth;
+    let height = heroCanvas.height = heroCanvas.parentElement.offsetHeight;
+
+    window.addEventListener('resize', () => {
+      width = heroCanvas.width = heroCanvas.parentElement.offsetWidth;
+      height = heroCanvas.height = heroCanvas.parentElement.offsetHeight;
+    });
+
+    const particles = [];
+    const particleCount = Math.min(35, Math.floor(width / 35));
+
+    for (let i = 0; i < particleCount; i++) {
+      particles.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4,
+        radius: Math.random() * 2 + 1,
+        color: Math.random() > 0.3 ? 'rgba(7, 143, 200, 0.4)' : 'rgba(247, 148, 50, 0.5)'
+      });
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, width, height);
+
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0 || p.x > width) p.vx *= -1;
+        if (p.y < 0 || p.y > height) p.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = p.color;
+        ctx.fill();
+
+        for (let j = i + 1; j < particles.length; j++) {
+          const p2 = particles[j];
+          const dx = p.x - p2.x;
+          const dy = p.y - p2.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < 120) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.strokeStyle = `rgba(7, 143, 200, ${0.18 - dist / 120 * 0.18})`;
+            ctx.lineWidth = 0.8;
+            ctx.stroke();
+          }
+        }
       }
 
-      setTimeout(() => {
-        if (formFeedback) {
-          formFeedback.style.display = 'block';
-          formFeedback.innerHTML = `
-            <div style="padding: 1.15rem; background-color: #EEF7EE; border-left: 4px solid #2E7D32; color: #1B5E20; font-size: 0.875rem; font-weight: 700; border-radius: 4px;">
-              Thank you. Your consultation request has been received. Our team will respond within 24 hours.
-            </div>
-          `;
-        }
-        
-        contactForm.reset();
-        
-        if (submitBtn) {
-          submitBtn.disabled = false;
-          submitBtn.innerHTML = originalText;
-        }
-      }, 900);
+      requestAnimationFrame(animateParticles);
+    }
+
+    animateParticles();
+  }
+
+  // --------------------------------------------------------------------------
+  // 10. SPOTLIGHT CURSOR GLOW CARD TRACKER
+  // --------------------------------------------------------------------------
+  const spotlightCards = document.querySelectorAll('.spotlight-card, .why-card-v3, .principle-card, .pipeline-step-card, .featured-insight-card-v3, .side-insight-card-v3');
+  spotlightCards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      card.style.setProperty('--mouse-x', `${x}px`);
+      card.style.setProperty('--mouse-y', `${y}px`);
     });
+  });
+
+  // --------------------------------------------------------------------------
+  // 11. NUMBER COUNTER ROLL-UPS
+  // --------------------------------------------------------------------------
+  const counters = document.querySelectorAll('[data-counter]');
+  if (counters.length > 0) {
+    const counterObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const target = entry.target;
+          const endValue = parseInt(target.getAttribute('data-counter'), 10);
+          if (isNaN(endValue)) return;
+          
+          const prefix = target.textContent.includes('+') ? '+' : '';
+          const suffix = target.textContent.includes('%') ? '%' : '';
+          let startValue = 0;
+          const duration = 1600;
+          const startTime = performance.now();
+
+          function updateCounter(currentTime) {
+            const elapsedTime = currentTime - startTime;
+            const progress = Math.min(elapsedTime / duration, 1);
+            const easeProgress = 1 - Math.pow(1 - progress, 3);
+            const currentValue = Math.floor(easeProgress * endValue);
+            
+            target.textContent = `${prefix}${currentValue}${suffix}`;
+
+            if (progress < 1) {
+              requestAnimationFrame(updateCounter);
+            }
+          }
+
+          requestAnimationFrame(updateCounter);
+          observer.unobserve(target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    counters.forEach(counter => counterObserver.observe(counter));
   }
 });
