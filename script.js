@@ -86,37 +86,20 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --------------------------------------------------------------------------
-  // 3. HERO MOUSE PARALLAX & SIDE NAV INTERACTION
+  // 3. HERO MOUSE PARALLAX (HERO V2 ARCHITECTURAL GEOMETRY)
   // --------------------------------------------------------------------------
-  const heroCard = document.querySelector('.hero-floating-card');
-  const heroImgWrapper = document.querySelector('.hero-image-wrapper');
+  const heroPhotoCanvas = document.querySelector('.hero-photo-canvas-v2');
+  const dgBgSvg = document.querySelector('.dg-bg-geometry-svg');
   
-  if (heroCard && window.innerWidth > 1024) {
+  if (heroPhotoCanvas && window.innerWidth > 1024) {
     window.addEventListener('mousemove', (e) => {
-      const mouseX = (e.clientX / window.innerWidth - 0.5) * 16;
-      const mouseY = (e.clientY / window.innerHeight - 0.5) * 16;
+      const mouseX = (e.clientX / window.innerWidth - 0.5) * 12;
+      const mouseY = (e.clientY / window.innerHeight - 0.5) * 12;
       
-      heroCard.style.transform = `translate3d(${-mouseX}px, calc(-50% + ${-mouseY}px), 0)`;
-      if (heroImgWrapper) {
-        heroImgWrapper.style.transform = `translate3d(${mouseX * 0.5}px, ${mouseY * 0.5}px, 0)`;
+      heroPhotoCanvas.style.transform = `translate3d(${mouseX * 0.4}px, ${mouseY * 0.4}px, 0)`;
+      if (dgBgSvg) {
+        dgBgSvg.style.transform = `translate3d(${-mouseX * 0.8}px, ${-mouseY * 0.8}px, 0)`;
       }
-    });
-  }
-
-  const sideNavItems = document.querySelectorAll('.side-nav-item');
-  if (sideNavItems.length > 0) {
-    sideNavItems.forEach((item, index) => {
-      item.addEventListener('click', () => {
-        sideNavItems.forEach(i => i.classList.remove('active'));
-        item.classList.add('active');
-        
-        // Scroll smoothly to corresponding section
-        const targets = ['#hero', '#intro', '#services', '#why-dg'];
-        if (targets[index]) {
-          const section = document.querySelector(targets[index]);
-          if (section) section.scrollIntoView({ behavior: 'smooth' });
-        }
-      });
     });
   }
 
