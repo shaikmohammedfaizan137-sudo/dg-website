@@ -369,16 +369,30 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const particles = [];
-    const particleCount = Math.min(35, Math.floor(width / 35));
+    const particleCount = Math.min(65, Math.floor(width / 20));
 
     for (let i = 0; i < particleCount; i++) {
+      const randColor = Math.random();
+      let color, glowColor;
+      if (randColor > 0.6) {
+        color = 'rgba(7, 143, 200, 0.85)';
+        glowColor = 'rgba(7, 143, 200, 0.35)';
+      } else if (randColor > 0.3) {
+        color = 'rgba(247, 148, 50, 0.9)';
+        glowColor = 'rgba(247, 148, 50, 0.4)';
+      } else {
+        color = 'rgba(56, 189, 248, 0.85)';
+        glowColor = 'rgba(56, 189, 248, 0.35)';
+      }
+
       particles.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.4,
-        vy: (Math.random() - 0.5) * 0.4,
-        radius: Math.random() * 2 + 1,
-        color: Math.random() > 0.3 ? 'rgba(7, 143, 200, 0.4)' : 'rgba(247, 148, 50, 0.5)'
+        vx: (Math.random() - 0.5) * 0.65,
+        vy: (Math.random() - 0.5) * 0.65,
+        radius: Math.random() * 2.5 + 2,
+        color: color,
+        glowColor: glowColor
       });
     }
 
@@ -393,6 +407,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (p.x < 0 || p.x > width) p.vx *= -1;
         if (p.y < 0 || p.y > height) p.vy *= -1;
 
+        // Node Glow Ring
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius * 2.4, 0, Math.PI * 2);
+        ctx.fillStyle = p.glowColor;
+        ctx.fill();
+
+        // Core Node
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
         ctx.fillStyle = p.color;
@@ -404,12 +425,13 @@ document.addEventListener('DOMContentLoaded', () => {
           const dy = p.y - p2.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
 
-          if (dist < 120) {
+          if (dist < 150) {
+            const alpha = (0.45 - (dist / 150) * 0.45);
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = `rgba(7, 143, 200, ${0.18 - dist / 120 * 0.18})`;
-            ctx.lineWidth = 0.8;
+            ctx.strokeStyle = `rgba(7, 143, 200, ${alpha})`;
+            ctx.lineWidth = 1.15;
             ctx.stroke();
           }
         }
