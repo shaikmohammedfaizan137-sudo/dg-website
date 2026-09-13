@@ -375,22 +375,22 @@ document.addEventListener('DOMContentLoaded', () => {
       const randColor = Math.random();
       let color, glowColor;
       if (randColor > 0.6) {
-        color = 'rgba(7, 143, 200, 0.85)';
-        glowColor = 'rgba(7, 143, 200, 0.35)';
+        color = 'rgba(7, 143, 200, 0.68)';
+        glowColor = 'rgba(7, 143, 200, 0.25)';
       } else if (randColor > 0.3) {
-        color = 'rgba(247, 148, 50, 0.9)';
-        glowColor = 'rgba(247, 148, 50, 0.4)';
+        color = 'rgba(247, 148, 50, 0.72)';
+        glowColor = 'rgba(247, 148, 50, 0.3)';
       } else {
-        color = 'rgba(56, 189, 248, 0.85)';
-        glowColor = 'rgba(56, 189, 248, 0.35)';
+        color = 'rgba(56, 189, 248, 0.68)';
+        glowColor = 'rgba(56, 189, 248, 0.25)';
       }
 
       particles.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.65,
-        vy: (Math.random() - 0.5) * 0.65,
-        radius: Math.random() * 2.5 + 2,
+        vx: (Math.random() - 0.5) * 0.55,
+        vy: (Math.random() - 0.5) * 0.55,
+        radius: Math.random() * 2.2 + 1.8,
         color: color,
         glowColor: glowColor
       });
@@ -409,7 +409,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Node Glow Ring
         ctx.beginPath();
-        ctx.arc(p.x, p.y, p.radius * 2.4, 0, Math.PI * 2);
+        ctx.arc(p.x, p.y, p.radius * 2.2, 0, Math.PI * 2);
         ctx.fillStyle = p.glowColor;
         ctx.fill();
 
@@ -425,13 +425,13 @@ document.addEventListener('DOMContentLoaded', () => {
           const dy = p.y - p2.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
 
-          if (dist < 150) {
-            const alpha = (0.45 - (dist / 150) * 0.45);
+          if (dist < 140) {
+            const alpha = (0.32 - (dist / 140) * 0.32);
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(p2.x, p2.y);
             ctx.strokeStyle = `rgba(7, 143, 200, ${alpha})`;
-            ctx.lineWidth = 1.15;
+            ctx.lineWidth = 1.0;
             ctx.stroke();
           }
         }
